@@ -9,11 +9,13 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 public class EditMovieActivity extends AppCompatActivity {
 
     Spinner spnRating;
     EditText etTitle, etGenre, etYear;
+    TextView tvId;
     Button btnUpdate, btnDelete, btnCancel;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +25,7 @@ public class EditMovieActivity extends AppCompatActivity {
         etTitle = findViewById(R.id.editTextTitle);
         etGenre = findViewById(R.id.editTextGenre);
         etYear = findViewById(R.id.editTextYear);
+        tvId = findViewById(R.id.tvId);
         spnRating = findViewById(R.id.spinner);
 
         btnUpdate = findViewById(R.id.btnInsert);
@@ -31,6 +34,9 @@ public class EditMovieActivity extends AppCompatActivity {
 
         Intent i = getIntent();
         Movies movies = (Movies) i.getSerializableExtra("movies");
+
+
+        tvId.setText(String.valueOf(movies.getId()));
         etTitle.setText(movies.getTitle());
         etGenre.setText(movies.getGenre());
         etYear.setText(String.valueOf(movies.getYear()));
