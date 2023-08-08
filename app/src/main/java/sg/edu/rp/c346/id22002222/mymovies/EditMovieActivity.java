@@ -22,7 +22,8 @@ public class EditMovieActivity extends AppCompatActivity {
     EditText etTitle, etGenre, etYear;
     TextView tvId;
     Button btnUpdate, btnDelete, btnCancel;
-    LottieDialog dialog;
+    LottieDialog dialog1;
+    LottieDialog dialog2;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,6 +110,7 @@ public class EditMovieActivity extends AppCompatActivity {
                 Button okButton = new Button(EditMovieActivity.this);
                 okButton.setText("DISCARD");
                 okButton.setOnClickListener(view -> {
+                    dialog1.cancel();
                     finish();
 
                 });
@@ -116,11 +118,11 @@ public class EditMovieActivity extends AppCompatActivity {
                 Button cancelButton = new Button(EditMovieActivity.this);
                 cancelButton.setText("DO NOT DISCARD");
                 cancelButton.setOnClickListener(view -> {
-                    dialog.cancel();
+                    dialog1.cancel();
 
                 });
 
-                dialog = new LottieDialog(EditMovieActivity.this)
+                dialog1 = new LottieDialog(EditMovieActivity.this)
                         .setAnimation(R.raw.animation_cancel)
                         .setAnimationRepeatCount(LottieDialog.INFINITE)
                         .setAutoPlayAnimation(true)
@@ -135,7 +137,7 @@ public class EditMovieActivity extends AppCompatActivity {
                         .setOnShowListener(dialogInterface -> {})
                         .setOnDismissListener(dialogInterface -> {})
                         .setOnCancelListener(dialogInterface -> {});
-                dialog.show();
+                dialog1.show();
 
 
             }
@@ -177,7 +179,8 @@ public class EditMovieActivity extends AppCompatActivity {
                 okButton.setText("DELETE");
                 okButton.setOnClickListener(view -> {
                     DBHelper dbh = new DBHelper(EditMovieActivity.this);
-                        dbh.deleteSong(movies.getId());
+                        dbh.deleteMovies(movies.getId());
+                        dialog2.cancel();
                         finish();
 
                 });
@@ -185,11 +188,11 @@ public class EditMovieActivity extends AppCompatActivity {
                 Button cancelButton = new Button(EditMovieActivity.this);
                 cancelButton.setText("CANCEL");
                 cancelButton.setOnClickListener(view -> {
-                        dialog.cancel();
+                        dialog2.cancel();
 
                 });
 
-                 dialog = new LottieDialog(EditMovieActivity.this)
+                 dialog2 = new LottieDialog(EditMovieActivity.this)
                         .setAnimation(R.raw.animation)
                         .setAnimationRepeatCount(LottieDialog.INFINITE)
                         .setAutoPlayAnimation(true)
@@ -205,7 +208,7 @@ public class EditMovieActivity extends AppCompatActivity {
                         .setOnShowListener(dialogInterface -> {})
                         .setOnDismissListener(dialogInterface -> {})
                         .setOnCancelListener(dialogInterface -> {});
-                dialog.show();
+                dialog2.show();
             }
         });
 
